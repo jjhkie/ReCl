@@ -69,7 +69,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         //adapter 초기화
-        articleAdapter = ArticleAdapter()
+        articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
+            //이 부분이 recyclerView를 클릭했을 때 발생하는 코드
+        })
         //adapter 체크
 //        articleAdapter.submitList(mutableListOf<ArticleModel>().apply{
 //            add(ArticleModel("0","abcd",1000000,"5000원",""))
@@ -81,12 +83,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //floating 버튼을 클릭하여 글 작성 페이지 이동
         binding.addFloatingButton.setOnClickListener {
             //TODO 로그인 기능 생성 후 주석 제거 : 회원일 때만 글을 작성할 수 있도록 설정
-            //if (auth.currentUser != null) {
+            if (auth.currentUser != null) {
                 val intent = Intent(requireContext(), AddArticleActivity::class.java)
                 startActivity(intent)
-            //}else{
-            //    Snackbar.make(view,"로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
-            //}
+            }else {
+                Snackbar.make(view, "로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
+            }
         }
 
 

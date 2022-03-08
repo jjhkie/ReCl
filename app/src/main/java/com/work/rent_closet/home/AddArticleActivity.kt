@@ -8,7 +8,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -48,10 +50,14 @@ class AddArticleActivity : AppCompatActivity() {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     startContentProvider()
-                }//교육용 팝업이 필요한 경우
+                }
+                //PERMISSION_DENIED를 반환했을 경우 showShowRequestPermissionRationable()은 true를 반환
+                //교육용 팝업이 필요한 경우
                 shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                     showPermissionContextPopup()
                 }
+
+
                 else -> {
                     requestPermissions(
                         arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -67,6 +73,7 @@ class AddArticleActivity : AppCompatActivity() {
             val price = binding.priceEditText.text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
 
+            showProgress()
             //중간에 이미지가 있으면 업로드 과정을 추가
             if (selectedUri != null) {
                 val photoUri =
@@ -77,6 +84,7 @@ class AddArticleActivity : AppCompatActivity() {
                     },
                     errorHandler = {
                         Toast.makeText(this,"사진 업로드에 실패했습니다.",Toast.LENGTH_LONG).show()
+                        hideProgress()
                     }
                 )
             }else{
@@ -118,6 +126,8 @@ class AddArticleActivity : AppCompatActivity() {
     private fun uploadArticle(sellerId: String, title: String, price: String, imageUrl: String){
         val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", "")
         articleDB.push().setValue(model)
+
+        hideProgress()
         finish()
     }
 
@@ -131,9 +141,12 @@ class AddArticleActivity : AppCompatActivity() {
         when (requestCode) {
             1000 ->
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //권한이 허가된 것으로 아래 코드 실행
                     startContentProvider()
                 } else {
+                    //권한이 거부됐을 때 동작
                     Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_LONG).show()
+
                 }
         }
     }
@@ -142,6 +155,15 @@ class AddArticleActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"//이미지 타입만 가져와라
         startActivityForResult(intent, 2000)
+    }
+
+    //progress bar 설정
+    //이미지를 업로드할 때 약간의 로딩이 있으므로 progressbar를 설정
+    private fun showProgress(){
+        binding.progressBar.isVisible = true
+    }
+    private fun hideProgress(){
+        binding.progressBar.isVisible = false
     }
 
     //데이터를 가져온다.
@@ -160,12 +182,12 @@ class AddArticleActivity : AppCompatActivity() {
                     binding.photoImageView.setImageURI(uri)
                     selectedUri = uri
                 } else {
-                    Toast.makeText(this, "사진ㅇ,ㄹ 가져오지 못했습니다.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_LONG).show()
                 }
 
             }
             else -> {
-                Toast.makeText(this, "사진ㅇ,ㄹ 가져오지 못했습니다.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -174,7 +196,7 @@ class AddArticleActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
             .setMessage("사진을 가져오기 위해 필요합니다.")
-            .setPositiveButton("동의") { _, _ ->
+            .setPositiveButton("동의") { _ , _ ->
                 requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
             }
             .create()

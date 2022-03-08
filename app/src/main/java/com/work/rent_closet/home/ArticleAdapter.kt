@@ -12,7 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diffUtil) {
+
+class ArticleAdapter (val onItemClicked: (ArticleModel) -> Unit): ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,6 +33,14 @@ class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diff
                 Glide.with(binding.thumbnailImageView)
                     .load(articleModel.imageUrl)
                     .into(binding.thumbnailImageView)
+            }
+
+            //root은 하나의 리스트 전체를 의미하며 클릭하면
+            //onItemClicked가 실행되고 위에 fun bind(articleModel: ArticleModel)을 인자로 넘겨준다.
+            //그러면 ArticleAdapter를 처음 초기화해준 부분에서 람다가 실행된다.
+            binding.root.setOnClickListener {
+                onItemClicked(articleModel)
+
             }
         }
     }
