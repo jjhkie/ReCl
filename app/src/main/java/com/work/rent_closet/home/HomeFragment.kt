@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.work.rent_closet.DBKey.Companion.DB_ARTICLES
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentHomeBinding
+import com.work.rent_closet.page.DetailArticle
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -70,7 +71,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
-            //이 부분이 recyclerView를 클릭했을 때 발생하는 코드
+            if(auth.currentUser != null){
+                //로그인이 되어있는 상황
+                val intent = Intent(requireContext(), DetailArticle::class.java)
+                intent.putExtra("createdAt",articleModel.createdAt)
+                intent.putExtra("price",articleModel.price)
+                intent.putExtra("sellerId",articleModel.sellerId)
+                intent.putExtra("title",articleModel.title)
+                intent.putExtra("image",articleModel.imageUrl)
+                startActivity(intent)
+                if(auth.currentUser!!.uid != articleModel.sellerId){
+
+                }else{
+                    //본인이 올린 게시물
+
+                }
+            }else{
+                //로그인을 하지않은 상황
+                Snackbar.make(view, "로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
+            }
+
+        //이 부분이 recyclerView를 클릭했을 때 발생하는 코드
         })
         //adapter 체크
 //        articleAdapter.submitList(mutableListOf<ArticleModel>().apply{

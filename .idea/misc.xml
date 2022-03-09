@@ -5,8 +5,14 @@
       <map>
         <entry key="app/src/main/res/drawable/selector_bottom_menu.xml" value="0.1175" />
         <entry key="app/src/main/res/layout/activity_add_article.xml" value="0.20364583333333333" />
+        <entry key="app/src/main/res/layout/activity_detailarticle.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/content_signup.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.2825641025641026" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.17142857142857143" />
+        <entry key="app/src/main/res/layout/item_article.xml" value="0.125" />
       </map>
     </option>
   </component>

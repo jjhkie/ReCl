@@ -1,7 +1,9 @@
 package com.work.rent_clothes.mypage
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -10,19 +12,26 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentMypageBinding
+import com.work.rent_closet.mypage.SignupFragment
 
 class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
     private lateinit var binding: FragmentMypageBinding
+    private val signupFragment by lazy{
+        SignupFragment()
+    }
     private val auth: FirebaseAuth by lazy {
         Firebase.auth
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val fragmentMypageBinding = FragmentMypageBinding.bind(view)
         binding = fragmentMypageBinding
+
+
 
 
         //로그인 로그아웃 기능
@@ -62,27 +71,10 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             }
         }
 
+        //회원가입
         binding.signUpButton.setOnClickListener {
-            binding?.let { binding ->
-                val email = binding.emailEditText.text.toString()
-                val password = binding.passwordEditText.text.toString()
+            parentFragmentManager.beginTransaction().replace(R.id.main_fragment,signupFragment).addToBackStack(null).commit();
 
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(requireActivity()) { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(context, "회원가입에 성공했습니다.", Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "회원가입에 실패했습니다. 이미 가입한 이메일입니다..",
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                        }
-                    }
-
-
-            }
         }
 
         binding.emailEditText.addTextChangedListener {
@@ -145,4 +137,5 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         binding?.signUpButton?.isEnabled = false
         binding?.signInOutButton.text = "로그아웃"
     }
+
 }
