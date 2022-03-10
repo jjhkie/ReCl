@@ -1,9 +1,7 @@
 package com.work.rent_clothes.mypage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -65,7 +63,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
                     binding.signInOutButton.text = "로그인"
                     binding.signInOutButton.isEnabled = true
-                    binding.signUpButton.isEnabled = false
+                    binding.signUpButton.isEnabled = true
+
 
                 }
             }
@@ -73,7 +72,7 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
         //회원가입
         binding.signUpButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.main_fragment,signupFragment).addToBackStack(null).commit();
+            parentFragmentManager.beginTransaction().add(R.id.main_fragment,signupFragment).addToBackStack(null).commit();
 
         }
 
@@ -82,7 +81,6 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                 val enable =
                     binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()
                 binding.signInOutButton.isEnabled = enable
-                binding.signUpButton.isEnabled = enable
             }
 
         }
@@ -92,7 +90,6 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                 val enable =
                     binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()
                 binding.signInOutButton.isEnabled = enable
-                binding.signUpButton.isEnabled = enable
             }
         }
     }
@@ -111,14 +108,14 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
                 binding.signInOutButton.text = "로그인"
                 binding.signInOutButton.isEnabled = false
-                binding.signUpButton.isEnabled = false
+
             }
             //로그인이 되어 있는 경우
         } else binding.let { binding ->
             binding.emailEditText.setText(auth.currentUser!!.email)
-            binding.emailEditText.isEnabled = true
+            binding.emailEditText.isEnabled = false
             binding.passwordEditText.setText("*********")
-            binding.passwordEditText.isEnabled = true
+            binding.passwordEditText.isEnabled = false
 
             binding.signInOutButton.text = "로그아웃"
             binding.signInOutButton.isEnabled = true

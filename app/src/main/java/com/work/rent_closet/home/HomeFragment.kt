@@ -2,6 +2,7 @@ package com.work.rent_closet.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.work.rent_closet.DBKey.Companion.DB_ARTICLES
+import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentHomeBinding
 import com.work.rent_closet.page.DetailArticle
@@ -22,11 +24,12 @@ import com.work.rent_closet.page.DetailArticle
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var articleDB: DatabaseReference
+    private lateinit var userDB:DatabaseReference
     private lateinit var binding: FragmentHomeBinding
     private lateinit var articleAdapter: ArticleAdapter
 
-    private val articleList = mutableListOf<ArticleModel>()
 
+    private val articleList = mutableListOf<ArticleModel>()
 
     private val listener = object : ChildEventListener {
         //데이터가 추가 되었을 때
@@ -68,12 +71,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //db 설정
         articleDB = Firebase.database.reference.child(DB_ARTICLES)//
 
+        userDB = Firebase.database.reference.child(DB_USER)
 
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
             if(auth.currentUser != null){
                 //로그인이 되어있는 상황
+                val detail_article= mutableListOf<ArticleModel>(articleModel)
+                Log.d("databadddddddddddddse",detail_article.toString())
                 val intent = Intent(requireContext(), DetailArticle::class.java)
+                intent.putExtra("dfdfd",detail_article)
                 intent.putExtra("createdAt",articleModel.createdAt)
                 intent.putExtra("price",articleModel.price)
                 intent.putExtra("sellerId",articleModel.sellerId)
@@ -107,6 +114,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (auth.currentUser != null) {
                 val intent = Intent(requireContext(), AddArticleActivity::class.java)
                 startActivity(intent)
+                //parentFragmentManager.beginTransaction().add(R.id.main_fragment,addArticleFragment).addToBackStack(null).commit();
             }else {
                 Snackbar.make(view, "로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
             }
@@ -138,3 +146,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         articleDB.removeEventListener(listener)
     }
 }
+
+

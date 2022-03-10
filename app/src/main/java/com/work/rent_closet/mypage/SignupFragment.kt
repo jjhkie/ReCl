@@ -51,8 +51,13 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
+                            val uid = auth.uid.toString()
                             Toast.makeText(context, "회원가입에 성공했습니다.", Toast.LENGTH_LONG).show()
-                            signUpDB(email, name, password, height, weight)
+                            signUpDB(email,uid, name, password, height, weight)
+                            activity?.supportFragmentManager
+                                ?.beginTransaction()
+                                ?.remove(this)
+                                ?.commit()
                         } else {
                             Toast.makeText(
                                 context,
@@ -71,13 +76,15 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private fun signUpDB(
         uemail: String,
+        uid: String,
         uname: String,
         upassword: String,
         uheight: String,
         uweight: String
     ) {
-        val model = UserModel(uemail, uname, upassword, uheight, uweight)
-        userDB.push().setValue(model)
+        val model = UserModel(uemail, uid,uname, upassword, uheight, uweight)
+        val email = uemail
+        userDB.child(uid).setValue(model)
 
     }
 

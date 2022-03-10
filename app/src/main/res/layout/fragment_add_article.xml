@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--시스템에 정의된 사이즈  : ?attr/actionBarSize -->
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
     <LinearLayout
         android:id="@+id/toolbarLayout"
         android:layout_width="0dp"
@@ -14,24 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/close_bt"
-            android:layout_width="wrap_content"
-            android:src="@drawable/ic__close_24"
-            android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="글쓰기"
+            android:text="등록"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/completion_bt"
-            android:text="완료"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
     <View
@@ -94,10 +84,21 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/orange"
         android:text="등록하기"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageAddButton"
         app:layout_goneMarginEnd="16dp" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:text="닫기"
+        app:layout_constraintEnd_toEndOf="@id/submitButton"
+        app:layout_constraintStart_toStartOf="@id/submitButton"
+        app:layout_constraintTop_toBottomOf="@id/submitButton" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -109,5 +110,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
