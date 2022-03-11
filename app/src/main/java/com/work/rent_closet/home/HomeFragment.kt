@@ -20,6 +20,8 @@ import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentHomeBinding
 import com.work.rent_closet.page.DetailArticle
+import java.io.Serializable
+import java.io.SerializablePermission
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -76,16 +78,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
             if(auth.currentUser != null){
+                Log.d("databadddddddddddddse",articleModel.toString())
+                //TODO detail_articel 을 한번에 넘기기 설정
                 //로그인이 되어있는 상황
-                val detail_article= mutableListOf<ArticleModel>(articleModel)
-                Log.d("databadddddddddddddse",detail_article.toString())
+
+                //val detail_article= mutableListOf<ArticleModel>(articleModel)
+                //Log.d("databadddddddddddddse",detail_article.toString())
                 val intent = Intent(requireContext(), DetailArticle::class.java)
-                intent.putExtra("dfdfd",detail_article)
+                intent.putExtra("sellerName",articleModel.sellerName)
                 intent.putExtra("createdAt",articleModel.createdAt)
                 intent.putExtra("price",articleModel.price)
+                intent.putExtra("content",articleModel.content)
                 intent.putExtra("sellerId",articleModel.sellerId)
+
+                Log.d("databadddddddddddddse",articleModel.sellerId)
                 intent.putExtra("title",articleModel.title)
                 intent.putExtra("image",articleModel.imageUrl)
+                intent.putExtra("height",articleModel.height)
+                intent.putExtra("weight",articleModel.weight)
+                intent.putExtra("key",articleModel.key)
+
+
                 startActivity(intent)
                 if(auth.currentUser!!.uid != articleModel.sellerId){
 

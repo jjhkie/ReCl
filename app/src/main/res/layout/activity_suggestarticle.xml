@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="글쓰기"
+            android:text="제안하기"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarLayout" />
 
     <EditText
-        android:id="@+id/titleEditText"
+        android:id="@+id/suggest_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarLine" />
 
     <EditText
-        android:id="@+id/priceEditText"
+        android:id="@+id/suggest_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -65,9 +65,9 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleEditText" />
+        app:layout_constraintTop_toBottomOf="@id/suggest_title" />
     <EditText
-        android:id="@+id/contentEditText"
+        android:id="@+id/suggest_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -75,7 +75,7 @@
         android:hint="내용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/priceEditText" />
+        app:layout_constraintTop_toBottomOf="@id/suggest_price" />
 
     <ImageView
         android:id="@+id/photoImageView"
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/priceEditText" />
+        app:layout_constraintTop_toBottomOf="@id/suggest_content" />
 
     <Button
         android:id="@+id/imageAddButton"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@id/photoImageView" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/suggest_submit_bt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

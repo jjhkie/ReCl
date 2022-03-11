@@ -81,6 +81,7 @@ class AddArticleActivity : AppCompatActivity() {
         binding.completionBt.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val price = binding.priceEditText.text.toString()
+            val content = binding.contentEditText.text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
             var name = ""
             var height = ""
@@ -101,7 +102,7 @@ class AddArticleActivity : AppCompatActivity() {
                             uploadPhoto(
                                 photoUri!!,
                                 successHandler = { uri ->
-                                    uploadArticle(sellerId, name, title, price, uri, height, weight)
+                                    uploadArticle(sellerId, name, title,content, price, uri, height, weight)
                                 },
                                 errorHandler = {
                                     Toast.makeText(
@@ -113,7 +114,7 @@ class AddArticleActivity : AppCompatActivity() {
                                 }
                             )
                         } else {
-                            uploadArticle(sellerId, name, title, price, "", height, weight)
+                            uploadArticle(sellerId, name, title,content, price, "", height, weight)
 
 
                         }
@@ -160,23 +161,28 @@ class AddArticleActivity : AppCompatActivity() {
         sellerId: String,
         sellerName: String,
         title: String,
+        content:String,
         price: String,
         imageUrl: String,
         height: String,
         weight: String
     ) {
+
+        val dbkey = articleDB.push()
+        val key= dbkey.getKey().toString()
         val model = ArticleModel(
             sellerId,
             sellerName,
             title,
+            content,
             System.currentTimeMillis(),
             "$price 원",
             "",
             height,
-            weight
+            weight,
+            key
         )
-        articleDB.push().setValue(model)
-
+        dbkey.setValue(model)
         hideProgress()
         finish()
     }

@@ -12,11 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rent_closet" >
-        <activity
-            android:name=".mypage.SignupFragment"
-            android:exported="false"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/Theme.Rent_closet.NoActionBar" />
+        <activity android:name=".suggest.SuggestActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true" >
