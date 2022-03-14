@@ -1,6 +1,7 @@
 package com.work.rent_closet.suggest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -13,7 +14,7 @@ import com.work.rent_closet.DBKey
 import com.work.rent_closet.DBKey.Companion.DB_Suggest
 import com.work.rent_closet.databinding.ActivitySuggestarticleBinding
 
-class SuggestActivity: AppCompatActivity()  {
+class SuggestActivity : AppCompatActivity() {
     private val auth: FirebaseAuth by lazy {
         Firebase.auth
     }
@@ -25,21 +26,22 @@ class SuggestActivity: AppCompatActivity()  {
     private val articleDB: DatabaseReference by lazy {
         Firebase.database.reference.child(DBKey.DB_ARTICLES)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySuggestarticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val seller = intent.getStringExtra("sellerId")
+        val suggestId = auth.currentUser!!.uid
+        Log.d("databadddddddddddddse", "마지막 테스트 $seller")
         binding.completionBt.setOnClickListener {
             val title = binding.suggestTitle.text.toString()
             val price = binding.suggestPrice.text.toString()
             val content = binding.suggestContent.text.toString()
             val key = intent.getStringExtra("key")
 
-            val seller = intent.getStringExtra("sellrId")
-            val suggestId = auth.currentUser?.uid.orEmpty()
-
-            uploadSuggest(title,price,content,seller,suggestId,key.toString())
+            uploadSuggest(title, price, content, seller.toString(), suggestId, key.toString())
         }
 
         binding.closeBt.setOnClickListener {
@@ -47,10 +49,16 @@ class SuggestActivity: AppCompatActivity()  {
         }
 
 
-
     }
 
-    private fun uploadSuggest(title: String, price: String, content: String, seller: String?, suggestId: String, key: String) {
+    private fun uploadSuggest(
+        title: String,
+        price: String,
+        content: String,
+        seller: String,
+        suggestId: String,
+        key: String
+    ) {
         val model = SuggestModel(
             title,
             "$price 원",

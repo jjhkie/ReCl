@@ -39,17 +39,16 @@ class ChatItemAdapter(): ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffU
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<ChatListItem>() {
+        val diffUtil = object : DiffUtil.ItemCallback<ChatItem>() {
             //현재 리스트에 노출하고 있는 아이템과 새로운 아이템이 같은지 비교
             //즉, 새로운 값이 들어왔을 때 실행
-            override fun areItemsTheSame(oldItem: ChatListItem, newItem: ChatListItem): Boolean {
-
-                return oldItem.key == newItem.key
+            override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {
+                return oldItem == newItem
             }
 
             //현재 노출하고 있는 아이템과 새로운 아이템이 같은지 비교하는
-            override fun areContentsTheSame(oldItem: ChatListItem, newItem: ChatListItem): Boolean {
-                return oldItem == newItem
+            override fun areContentsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {
+                TODO("Not yet implemented")
             }
 
         }

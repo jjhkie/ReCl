@@ -84,7 +84,7 @@ class DetailArticle : AppCompatActivity() {
         val imageUri = intent.getStringExtra("image")
 
         val sellerId = intent.getStringExtra("sellerId")
-
+        Log.d("databadddddddddddddse","이거 꼭 봐 $sellerId")
         binding.detailTitle.text = title
         binding.detailPrice.text = price
         binding.detailSellerName.text = sellerName
@@ -102,7 +102,7 @@ class DetailArticle : AppCompatActivity() {
             binding.detailBt.text = "제안하기"
             binding.detailBt.setOnClickListener {
                 val intent = Intent(this, SuggestActivity::class.java)
-                intent.putExtra("sellerId", sellerId)
+                intent.putExtra("sellerId", sellerId.toString())
                 intent.putExtra("key", key)
                 startActivity(intent)
             }
@@ -129,7 +129,6 @@ class DetailArticle : AppCompatActivity() {
 
         //제안한 목록을 클릭했을 때
         suggestAdapter = SuggestAdapter(onItemClicked = { suggestModel ->
-
             val chatRoom = ChatListItem(
                 buyerId =auth.currentUser!!.uid,
                 sellerId=suggestModel.suggestId,
@@ -137,6 +136,9 @@ class DetailArticle : AppCompatActivity() {
                 itemNo = suggestModel.key,
                 key = System.currentTimeMillis()
             )
+            Log.d("databadddddddddddddse","이거야 $chatRoom")
+            Log.d("databadddddddddddddse","이거야 $chatRoom")
+            Log.d("databadddddddddddddse","이거야 $suggestModel")
             userDB.child(auth.currentUser!!.uid)
                 .child(DB_CHAT)
                 .child(suggestModel.key)

@@ -15,7 +15,7 @@ class ChatListAdapter (val onItemClicked: (ChatListItem) -> Unit): ListAdapter<C
 
     inner class ViewHolder(private val binding: ItemChatListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        //articleModel 과 연결
+
         fun bind(chatListItem: ChatListItem) {
 
             binding.chatRoomTitleTextView.text = chatListItem.itemTitle

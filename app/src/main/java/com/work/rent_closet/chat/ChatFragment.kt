@@ -41,8 +41,9 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         chatListAdapter = ChatListAdapter(onItemClicked = {charListItem->
             //채팅방으로 이동하는 코드
             context?.let{
-                itemkey = charListItem.itemNo.toString()
+                itemkey = charListItem.itemNo
                 val intent = Intent(it, ChatRoomActivity::class.java)
+                intent.putExtra("chatKey", charListItem.key)
                 intent.putExtra("itemId",charListItem.itemNo)
                 startActivity(intent)
             }
@@ -59,7 +60,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         chatDB = Firebase.database.reference.child(DB_USER)
             .child(auth.currentUser!!.uid)
             .child(DB_CHAT)
-            .child(itemkey.toString())
 
 
         chatDB.addListenerForSingleValueEvent(object: ValueEventListener{

@@ -1,6 +1,7 @@
 package com.work.rent_closet.chatroom
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.work.rent_closet.DBKey.Companion.DB_CHAT
+import com.work.rent_closet.DBKey.Companion.DB_ROOM
 import com.work.rent_closet.databinding.ActivityChatroomBinding
 
 class ChatRoomActivity : AppCompatActivity() {
@@ -23,7 +25,7 @@ class ChatRoomActivity : AppCompatActivity() {
     private val chatList = mutableListOf<ChatItem>()
     private val adapter = ChatItemAdapter()
     private lateinit var chatRoomDB: DatabaseReference
-    private val keyId by lazy{
+    private val keyId by lazy {
         intent.getStringExtra("itemId")
     }
     private lateinit var binding: ActivityChatroomBinding
@@ -33,13 +35,15 @@ class ChatRoomActivity : AppCompatActivity() {
         binding = ActivityChatroomBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val chatKey = intent.getLongExtra("chatKey", -1)
         chatRoomDB = Firebase.database.reference
-            .child(auth.currentUser!!.uid)
-            .child(DB_CHAT)
-            .child("$keyId")
-        chatRoomDB?.addChildEventListener(object: ChildEventListener{
+            .child(DB_ROOM).child("$chatKey")
+
+        Log.d("databadddddddddddddse", "room 생성 $keyId")
+        chatRoomDB.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatItem = snapshot.getValue(ChatItem::class.java)
+                Log.d("databadddddddddddddse", "room addchildEventListnenr $chatItem")
                 chatItem ?: return
 
                 chatList.add(chatItem)
@@ -68,7 +72,7 @@ class ChatRoomActivity : AppCompatActivity() {
                 senderId = auth.currentUser!!.uid,
                 message = binding.messageEditText.text.toString()
             )
-            chatRoomDB.setValue(chatItem)
+            chatRoomDB.push().setValue(chatItem)
         }
     }
 }

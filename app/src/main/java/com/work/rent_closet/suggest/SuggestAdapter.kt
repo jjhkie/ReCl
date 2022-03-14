@@ -1,5 +1,6 @@
 package com.work.rent_closet.suggest
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,11 +14,12 @@ class SuggestAdapter (val onItemClicked:(SuggestModel)->Unit): ListAdapter<Sugge
 
     inner class ViewHolder(private val binding: ItemSuggestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        //articleModel 과 연결
+
         fun bind(suggestModel: SuggestModel) {
 
             binding.suggestTitle.text = suggestModel.title
             binding.suggestPrice.text = suggestModel.price
+            Log.d("databadddddddddddddse","suggestAdapter$suggestModel")
 
             //예외처리로 imageUrl이 비어있지않다면 실행
             if (suggestModel.imageUrl.isNotEmpty()) {
