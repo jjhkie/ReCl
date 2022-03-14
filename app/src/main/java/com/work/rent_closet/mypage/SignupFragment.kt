@@ -82,8 +82,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
         uheight: String,
         uweight: String
     ) {
-        val model = UserModel(uemail, uid,uname, upassword, uheight, uweight)
-        val email = uemail
+        val model = UserModel(uemail, uid,uname, upassword, "$uheight cm", "$uweight kg")
         userDB.child(uid).setValue(model)
 
     }

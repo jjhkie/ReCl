@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.work.rent_closet.databinding.ItemSuggestBinding
 
 
-class SuggestAdapter (): ListAdapter<SuggestModel, SuggestAdapter.ViewHolder>(diffUtil) {
+class SuggestAdapter (val onItemClicked:(SuggestModel)->Unit): ListAdapter<SuggestModel, SuggestAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemSuggestBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,7 +31,7 @@ class SuggestAdapter (): ListAdapter<SuggestModel, SuggestAdapter.ViewHolder>(di
             //onItemClicked가 실행되고 위에 fun bind(articleModel: ArticleModel)을 인자로 넘겨준다.
             //그러면 ArticleAdapter를 처음 초기화해준 부분에서 람다가 실행된다.
             binding.root.setOnClickListener {
-                //onItemClicked(suggestModel)
+                onItemClicked(suggestModel)
 
             }
         }

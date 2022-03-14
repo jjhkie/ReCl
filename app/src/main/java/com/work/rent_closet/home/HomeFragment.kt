@@ -92,12 +92,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 intent.putExtra("sellerId",articleModel.sellerId)
 
                 Log.d("databadddddddddddddse",articleModel.sellerId)
+
                 intent.putExtra("title",articleModel.title)
                 intent.putExtra("image",articleModel.imageUrl)
                 intent.putExtra("height",articleModel.height)
                 intent.putExtra("weight",articleModel.weight)
                 intent.putExtra("key",articleModel.key)
 
+                Log.d("databadddddddddddddse",articleModel.key)
 
                 startActivity(intent)
                 if(auth.currentUser!!.uid != articleModel.sellerId){
