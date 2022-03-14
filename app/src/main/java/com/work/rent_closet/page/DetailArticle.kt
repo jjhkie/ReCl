@@ -127,23 +127,24 @@ class DetailArticle : AppCompatActivity() {
         userDB = Firebase.database.reference.child(DB_USER)
         Log.d("databadddddddddddddse", articleDB.toString())
 
+        //제안한 목록을 클릭했을 때
         suggestAdapter = SuggestAdapter(onItemClicked = { suggestModel ->
 
             val chatRoom = ChatListItem(
                 buyerId =auth.currentUser!!.uid,
-                sellerId=suggestModel.seller.toString(),
+                sellerId=suggestModel.suggestId,
                 itemTitle = suggestModel.title,
                 itemNo = suggestModel.key,
                 key = System.currentTimeMillis()
             )
             userDB.child(auth.currentUser!!.uid)
                 .child(DB_CHAT)
-                .push()
+                .child(suggestModel.key)
                 .setValue(chatRoom)
 
-            userDB.child(suggestModel.suggetId)
+            userDB.child(suggestModel.suggestId)
                 .child(DB_CHAT)
-                .push()
+                .child(suggestModel.key)
                 .setValue(chatRoom)
 
         Toast.makeText(this,"채팅방이 생성되었씁니ㅏㄷ..",Toast.LENGTH_LONG).show()

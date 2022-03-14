@@ -7,7 +7,7 @@ data class SuggestModel(
     val content: String,
     val imageUrl:String,
     val seller: String?,
-    val suggetId: String,
+    val suggestId: String,
     val key: String
 ){
     constructor(): this("","",0,"","","","","")

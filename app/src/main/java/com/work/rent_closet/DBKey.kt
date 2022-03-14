@@ -6,5 +6,6 @@ class DBKey {
         const val DB_USER = "User"
         const val DB_Suggest = "Suggest"
         const val DB_CHAT = "Chat"
+        const val DB_ROOM = "Room"
     }
 }
