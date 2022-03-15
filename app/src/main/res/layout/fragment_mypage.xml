@@ -14,33 +14,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/cancel_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="15dp"
-            android:scaleType="fitStart"
-            android:src="@drawable/ic__close_24" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="회원가입"
+            android:text="로그인"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/signUp_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:paddingRight="20dp"
-            android:text="완료" />
+
 
     </LinearLayout>
     <LinearLayout
@@ -53,6 +39,10 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_account_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <EditText
             android:hint="Email"
             android:id="@+id/emailEditText"

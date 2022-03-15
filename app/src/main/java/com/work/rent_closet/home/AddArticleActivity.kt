@@ -83,6 +83,7 @@ class AddArticleActivity : AppCompatActivity() {
             val price = binding.priceEditText.text.toString()
             val content = binding.contentEditText.text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
+
             var name = ""
             var height = ""
             var weight = ""
@@ -177,7 +178,7 @@ class AddArticleActivity : AppCompatActivity() {
             content,
             System.currentTimeMillis(),
             "$price 원",
-            "",
+            imageUrl,
             height,
             weight,
             key
@@ -186,6 +187,7 @@ class AddArticleActivity : AppCompatActivity() {
         hideProgress()
         finish()
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

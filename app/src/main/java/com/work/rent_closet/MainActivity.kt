@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val chatFragment = ChatFragment()
         val myPageFragment = MyPageFragment()
 
+
         replaceFragment(homeFragment)//기본으로 home 프레그먼트를 설정한다.
 
         binding.bottomNavigationView.setOnItemSelectedListener {

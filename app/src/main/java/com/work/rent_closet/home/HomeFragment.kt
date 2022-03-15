@@ -78,12 +78,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
             if(auth.currentUser != null){
-                Log.d("databadddddddddddddse",articleModel.toString())
                 //TODO detail_articel 을 한번에 넘기기 설정
                 //로그인이 되어있는 상황
 
                 //val detail_article= mutableListOf<ArticleModel>(articleModel)
-                //Log.d("databadddddddddddddse",detail_article.toString())
                 val intent = Intent(requireContext(), DetailArticle::class.java)
                 intent.putExtra("sellerName",articleModel.sellerName)
                 intent.putExtra("createdAt",articleModel.createdAt)
@@ -91,15 +89,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 intent.putExtra("content",articleModel.content)
                 intent.putExtra("sellerId",articleModel.sellerId)
 
-                Log.d("databadddddddddddddse",articleModel.sellerId)
 
                 intent.putExtra("title",articleModel.title)
                 intent.putExtra("image",articleModel.imageUrl)
                 intent.putExtra("height",articleModel.height)
                 intent.putExtra("weight",articleModel.weight)
                 intent.putExtra("key",articleModel.key)
-
-                Log.d("databadddddddddddddse",articleModel.key)
 
                 startActivity(intent)
                 if(auth.currentUser!!.uid != articleModel.sellerId){
@@ -139,7 +134,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         /****/
         //fragment 는 context가 아니므로 getcontext로 가져와야 한다.
         //그런데 kotlin 에서는 get 을 생략할 수 있으므로 context로 작성
-        binding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.articleRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         binding.articleRecyclerView.adapter = articleAdapter
 
         //data를 가져오는 방법
