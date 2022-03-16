@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_round.xml" value="0.1775" />
         <entry key="app/src/main/res/drawable/gradation_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_one_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/imageview_round.xml" value="0.1505" />
