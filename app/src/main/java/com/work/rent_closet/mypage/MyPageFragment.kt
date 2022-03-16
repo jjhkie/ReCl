@@ -1,13 +1,17 @@
 package com.work.rent_clothes.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentMypageBinding
 import com.work.rent_closet.mypage.SignupFragment
@@ -15,21 +19,21 @@ import com.work.rent_closet.mypage.SignupFragment
 class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
     private lateinit var binding: FragmentMypageBinding
-    private val signupFragment by lazy{
+
+
+    private val signupFragment by lazy {
         SignupFragment()
     }
     private val auth: FirebaseAuth by lazy {
         Firebase.auth
     }
-
+    private var userDB:DatabaseReference = Firebase.database.reference.child(DB_USER)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val fragmentMypageBinding = FragmentMypageBinding.bind(view)
         binding = fragmentMypageBinding
-
-
 
 
         //로그인 로그아웃 기능
@@ -56,13 +60,16 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                         }
                 } else {
                     auth.signOut()
+                    binding.signInFallLayout.visibility = View.VISIBLE
+                    binding.signInScLayout.visibility = View.GONE
+                    binding.loginSubText.text = "회원 서비스를 위해 로그인 하세요"
                     binding.emailEditText.text.clear()
                     binding.emailEditText.isEnabled = true
                     binding.passwordEditText.text.clear()
                     binding.passwordEditText.isEnabled = true
 
                     binding.signInOutButton.text = "로그인"
-                    binding.signInOutButton.isEnabled = true
+                    binding.signInOutButton.isEnabled = false
                     binding.signUpButton.isEnabled = true
 
 
@@ -72,7 +79,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
         //회원가입
         binding.signUpButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.main_fragment,signupFragment).addToBackStack(null).commit();
+            parentFragmentManager.beginTransaction().add(R.id.main_fragment,   signupFragment)
+                .addToBackStack(null).commit();
 
         }
 
@@ -101,6 +109,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         if (auth.currentUser == null) {
             binding.let { binding ->
 
+                binding.signInFallLayout.visibility = View.VISIBLE
+                binding.signInScLayout.visibility = View.GONE
                 binding.emailEditText.text.clear()
                 binding.emailEditText.isEnabled = true
                 binding.passwordEditText.text.clear()
@@ -112,10 +122,11 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             }
             //로그인이 되어 있는 경우
         } else binding.let { binding ->
-            binding.emailEditText.setText(auth.currentUser!!.email)
-            binding.emailEditText.isEnabled = false
-            binding.passwordEditText.setText("*********")
-            binding.passwordEditText.isEnabled = false
+            login_su_skill()
+            binding.signInFallLayout.visibility = View.GONE
+            binding.signInScLayout.visibility = View.VISIBLE
+
+
 
             binding.signInOutButton.text = "로그아웃"
             binding.signInOutButton.isEnabled = true
@@ -129,10 +140,33 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             return
         }
 
+        login_su_skill()
+
         binding?.emailEditText?.isEnabled = false
         binding?.passwordEditText?.isEnabled = false
         binding?.signUpButton?.isEnabled = false
         binding?.signInOutButton.text = "로그아웃"
     }
+
+    private fun login_su_skill() {
+        userDB.child(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val login_su = it.getValue() //로그인한 사람의 정보를 읽어온다.
+
+            val name = it.child("uname").getValue(String::class.java)
+            val weight = it.child("uweight").getValue(String::class.java)
+            val height = it.child("uheight").getValue(String::class.java)
+
+            binding.loginSubText.visibility = View.GONE
+            binding.signInFallLayout.visibility = View.GONE
+            binding.signInScLayout.visibility = View.VISIBLE
+            binding.signInScName.text = "$name 님 \n 환영합니다!!👋🏻"
+            binding.signInScWeight.text = weight
+            binding.signInScHeight.text = height
+
+            Log.d("logintest", name.toString())
+        }
+    }
+
+
 
 }

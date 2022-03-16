@@ -17,6 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,69 +33,117 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logo 입니다."
+            android:text="ReCl 입니다."
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
+            android:id="@+id/login_sub_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="회원 서비스를 위해 로그인 해세요"
-            android:textSize="13sp" />
 
-        <EditText
-            android:layout_marginTop="80dp"
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:layout_marginBottom="10dp"/>
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:layout_marginBottom="10dp"
-            android:inputType="numberPassword" />
+            android:text="회원 서비스를 위해 로그인 하세요"
+            android:textSize="13sp"
+            android:layout_marginBottom="40dp"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
+            android:id="@+id/signIn_fall_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:visibility="visible"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="10dp"
+                android:hint="Email"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Password"
+                android:inputType="numberPassword" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/email_find_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이메일 찾기"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="|" />
+
+                <TextView
+                    android:id="@+id/password_find_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호 찾기"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="|" />
+
+                <TextView
+                    android:id="@+id/signUpButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원가입"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/signIn_sc_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:gravity="left">
 
             <TextView
-                android:id="@+id/email_find_text"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:id="@+id/signIn_sc_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이메일 찾기"
-                android:textColor="@color/black" />
+                android:textSize="28sp"
+                android:textColor="@color/black"
+                tools:text="이름"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:id="@+id/signIn_sc_weight"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="|"
-                android:layout_marginHorizontal="20dp"/>
+                android:textSize="14sp"
+                tools:text="몸무게"/>
+            <TextView
+                android:gravity="right"
+                android:id="@+id/signIn_sc_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="키"/>
 
-            <TextView
-                android:id="@+id/password_find_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="비밀번호 찾기"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="|"
-                android:layout_marginHorizontal="20dp"/>
-
-            <TextView
-                android:id="@+id/signUpButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="회원가입"
-                android:textColor="@color/black" />
         </LinearLayout>
 
     </LinearLayout>
