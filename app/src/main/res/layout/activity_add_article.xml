@@ -66,6 +66,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarLine" />
 
+    <Spinner
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/priceEditText"
         android:layout_width="0dp"

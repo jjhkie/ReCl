@@ -57,6 +57,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/signup_image_upload"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="이미지 등록" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:orientation="horizontal"
             android:paddingStart="30dp"
@@ -78,11 +90,42 @@
 
             <EditText
 
-                android:privateImeOptions="defaultinputmode=korean"
                 android:id="@+id/signUp_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="이름" />
+                android:hint="이름"
+                android:privateImeOptions="defaultinputmode=korean" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_one_24" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:text="성별"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/gender_spinner"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/signup_gender"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
 
         <LinearLayout
@@ -210,7 +253,6 @@
 
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

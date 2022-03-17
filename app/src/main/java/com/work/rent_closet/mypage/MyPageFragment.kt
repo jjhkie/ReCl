@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -153,6 +154,12 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             val name = it.child("uname").getValue(String::class.java)
             val weight = it.child("uweight").getValue(String::class.java)
             val height = it.child("uheight").getValue(String::class.java)
+            val uri = it.child("image").getValue(String::class.java)
+
+            Glide.with(binding.userThumbnail)
+                .load(uri)
+                .circleCrop()
+                .into(binding.userThumbnail)
 
             binding.loginSubText.visibility = View.GONE
             binding.signInFallLayout.visibility = View.GONE

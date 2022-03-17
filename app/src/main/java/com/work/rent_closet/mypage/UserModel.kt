@@ -5,6 +5,8 @@ import com.work.rent_closet.home.ArticleModel
 data class UserModel (
     val uemail: String,
     val uid: String,
+    val gender: String,
+    val image:String,
     val uName: String,
     val upassword: String,
     val uheight: String,
@@ -12,5 +14,5 @@ data class UserModel (
 
 
 ){
-    constructor(): this("","","","","","",)
+    constructor(): this("","","","","","","","",)
 }
