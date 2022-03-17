@@ -5,24 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--시스템에 정의된 사이즈  : ?attr/actionBarSize -->
-    <LinearLayout
-        android:id="@+id/toolbarLayout"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <ImageView
+        android:id="@+id/close_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitStart"
+        android:elevation="1dp"
+        android:src="@drawable/ic__close_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView
-            android:id="@+id/close_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:scaleType="fitStart"
-            android:src="@drawable/ic__close_24" />
-
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="0dp"
@@ -140,14 +135,13 @@
                             android:textColor="@color/black" />
 
                     </LinearLayout>
+
                     <Button
                         android:id="@+id/detail_bt"
-                        android:text="등록하기"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        />
+                        android:text="등록하기" />
                 </LinearLayout>
-
 
 
             </LinearLayout>

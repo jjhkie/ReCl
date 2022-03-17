@@ -60,9 +60,11 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                         }
                 } else {
                     auth.signOut()
+
                     binding.signInFallLayout.visibility = View.VISIBLE
                     binding.signInScLayout.visibility = View.GONE
                     binding.loginSubText.text = "회원 서비스를 위해 로그인 하세요"
+                    binding.loginSubText.visibility = View.VISIBLE
                     binding.emailEditText.text.clear()
                     binding.emailEditText.isEnabled = true
                     binding.passwordEditText.text.clear()
@@ -108,7 +110,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         //로그인이 안되어 있는 경우
         if (auth.currentUser == null) {
             binding.let { binding ->
-
+                binding.loginSubText.visibility = View.VISIBLE
+                binding.loginSubText.text = "회원 서비스를 위해 로그인 하세요"
                 binding.signInFallLayout.visibility = View.VISIBLE
                 binding.signInScLayout.visibility = View.GONE
                 binding.emailEditText.text.clear()
@@ -126,11 +129,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             binding.signInFallLayout.visibility = View.GONE
             binding.signInScLayout.visibility = View.VISIBLE
 
-
-
             binding.signInOutButton.text = "로그아웃"
             binding.signInOutButton.isEnabled = true
-            binding.signUpButton.isEnabled = false
         }
     }
 
@@ -142,8 +142,6 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
         login_su_skill()
 
-        binding?.emailEditText?.isEnabled = false
-        binding?.passwordEditText?.isEnabled = false
         binding?.signUpButton?.isEnabled = false
         binding?.signInOutButton.text = "로그아웃"
     }

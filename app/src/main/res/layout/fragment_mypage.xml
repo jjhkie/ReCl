@@ -18,31 +18,33 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:layout_gravity="center"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/logo" />
 
         <TextView
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="안녕하세요"
-
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="28sp" />
 
         <TextView
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ReCl 입니다."
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="28sp"
             android:layout_marginBottom="30dp"/>
 
         <TextView
             android:id="@+id/login_sub_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:gravity="center"
             android:text="회원 서비스를 위해 로그인 하세요"
             android:textSize="13sp"
             android:layout_marginBottom="40dp"
