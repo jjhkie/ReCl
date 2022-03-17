@@ -2,7 +2,6 @@ package com.work.rent_closet.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +19,7 @@ import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentHomeBinding
 import com.work.rent_closet.page.DetailArticle
-import java.io.Serializable
-import java.io.SerializablePermission
+
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
