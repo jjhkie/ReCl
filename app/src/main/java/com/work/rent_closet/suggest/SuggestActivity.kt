@@ -2,6 +2,7 @@ package com.work.rent_closet.suggest
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,7 +32,7 @@ class SuggestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySuggestarticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Toast.makeText(this,"여기까지는 들어오나?",Toast.LENGTH_LONG).show()
         val seller = intent.getStringExtra("sellerId")
         val suggestId = auth.currentUser!!.uid
         Log.d("databadddddddddddddse", "마지막 테스트 $seller")

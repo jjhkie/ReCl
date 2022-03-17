@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,6 +22,7 @@ import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.R
 import com.work.rent_closet.databinding.FragmentHomeBinding
 import com.work.rent_closet.page.DetailArticle
+import kotlin.math.absoluteValue
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -83,7 +87,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 val intent = Intent(requireContext(), DetailArticle::class.java)
                 intent.putExtra("sellerName",articleModel.sellerName)
                 intent.putExtra("createdAt",articleModel.createdAt)
-                intent.putExtra("price",articleModel.price)
+                intent.putExtra("category",articleModel.category)
                 intent.putExtra("content",articleModel.content)
                 intent.putExtra("sellerId",articleModel.sellerId)
 
@@ -132,8 +136,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         /****/
         //fragment 는 context가 아니므로 getcontext로 가져와야 한다.
         //그런데 kotlin 에서는 get 을 생략할 수 있으므로 context로 작성
-        binding.articleRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        binding.articleRecyclerView.adapter = articleAdapter
+        //binding.articleRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        //양 옆으로 사진이 보여지기 위해 add
+        binding.articleViewPager.offscreenPageLimit=3
+        binding.articleViewPager.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+        var transform = CompositePageTransformer()
+        transform.addTransformer(MarginPageTransformer(8))
+        transform.addTransformer(ViewPager2.PageTransformer{ view: View, fl: Float ->
+            var v = 1-Math.abs(fl)
+            view.scaleY = 0.8f + v * 0.2f
+        })
+        binding.articleViewPager.setPageTransformer(transform)
+
+        //add
+        binding.articleViewPager.adapter = articleAdapter
+        binding.articleViewPager.setCurrentItem(articleAdapter.itemCount/2, false)
 
         //data를 가져오는 방법
         //addchildeventListener 한번 등록해놓으면 이벤트가 발생할 때마다 등록이 된다.
@@ -141,9 +158,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //articleDB.addListenerForSingleValueEvent()
         //view create할 때마다 attach해주고, view destroy할 때 remove()
         articleDB.addChildEventListener(listener)
+        //initViews()
 
     }
 
+    private fun initViews() {
+        binding.articleViewPager.setPageTransformer { page, position ->
+            when {
+                position.absoluteValue >= 1F -> {
+                    page.alpha = 0F
+                }
+                position == 0F -> {
+                    page.alpha = 1F
+                }
+                else -> {
+                    page.alpha = 1F - 2 * position.absoluteValue
+                }
+            }
+        }
+    }
     override fun onResume() {
         super.onResume()
         articleAdapter.notifyDataSetChanged()

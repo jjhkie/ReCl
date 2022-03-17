@@ -79,14 +79,14 @@ class DetailArticle : AppCompatActivity() {
         val height = intent.getStringExtra("height")
         val weight = intent.getStringExtra("weight")
         val title = intent.getStringExtra("title")
-        val price = intent.getStringExtra("price")
+        val category = intent.getStringExtra("category")
         val content = intent.getStringExtra("content")
         val imageUri = intent.getStringExtra("image")
 
         val sellerId = intent.getStringExtra("sellerId")
         Log.d("databadddddddddddddse","이거 꼭 봐 $sellerId")
         binding.detailTitle.text = title
-        binding.detailPrice.text = price
+        binding.detailCategory.text = category
         binding.detailSellerName.text = sellerName
         binding.detailCreateAt.text = creatdAt
         binding.detailHeight.text = height
@@ -101,6 +101,7 @@ class DetailArticle : AppCompatActivity() {
         } else {
             binding.detailBt.text = "제안하기"
             binding.detailBt.setOnClickListener {
+                Toast.makeText(this,"클릭되었습니다.",Toast.LENGTH_LONG).show()
                 val intent = Intent(this, SuggestActivity::class.java)
                 intent.putExtra("sellerId", sellerId.toString())
                 intent.putExtra("key", key)

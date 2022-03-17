@@ -26,7 +26,7 @@ class ArticleAdapter (val onItemClicked: (ArticleModel) -> Unit): ListAdapter<Ar
 
             binding.titleTextView.text = articleModel.title
             binding.dateTextView.text = format.format(date).toString()
-            binding.priceTextView.text = articleModel.price
+            binding.categoryTextView.text = articleModel.category
             //binding.contentTextView.text = articleModel.content
 
             //예외처리로 imageUrl이 비어있지않다면 실행

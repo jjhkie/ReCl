@@ -11,7 +11,7 @@ data class ArticleModel(
     val title: String,
     val content: String,
     val createdAt: Long,
-    val price: String,
+    val category: String,
     val imageUrl: String,
     val height: String,
     val weight: String,
