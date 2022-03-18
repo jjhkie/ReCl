@@ -1,22 +1,18 @@
 package com.work.rent_closet.page
 
+
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.GridLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.work.rent_closet.DBKey.Companion.DB_ARTICLES
@@ -25,8 +21,6 @@ import com.work.rent_closet.DBKey.Companion.DB_Suggest
 import com.work.rent_closet.DBKey.Companion.DB_USER
 import com.work.rent_closet.chat.ChatListItem
 import com.work.rent_closet.databinding.ActivityDetailarticleBinding
-import com.work.rent_closet.home.ArticleAdapter
-import com.work.rent_closet.home.ArticleModel
 import com.work.rent_closet.suggest.SuggestActivity
 import com.work.rent_closet.suggest.SuggestAdapter
 import com.work.rent_closet.suggest.SuggestModel
@@ -36,7 +30,7 @@ class DetailArticle : AppCompatActivity() {
     private lateinit var binding: ActivityDetailarticleBinding
     private lateinit var suggestAdapter: SuggestAdapter
     private lateinit var articleDB: DatabaseReference
-    private lateinit var userDB:DatabaseReference
+    private lateinit var userDB: DatabaseReference
     private val auth: FirebaseAuth by lazy {
         Firebase.auth
     }
@@ -74,56 +68,63 @@ class DetailArticle : AppCompatActivity() {
         binding = ActivityDetailarticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sellerName = intent.getStringExtra("sellerName")
-        val creatdAt = intent.getStringExtra("creatdAt")
-        val height = intent.getStringExtra("height")
-        val weight = intent.getStringExtra("weight")
-        val title = intent.getStringExtra("title")
-        val category = intent.getStringExtra("category")
-        val content = intent.getStringExtra("content")
-        val imageUri = intent.getStringExtra("image")
 
-        val sellerId = intent.getStringExtra("sellerId")
-        Log.d("databadddddddddddddse","이거 꼭 봐 $sellerId")
-        binding.detailTitle.text = title
-        binding.detailCategory.text = category
-        binding.detailSellerName.text = sellerName
-        binding.detailCreateAt.text = creatdAt
-        binding.detailHeight.text = height
-        binding.detailWeight.text = weight
-        binding.detailContent.text = content
-        Log.d("databadddddddddddddse", key.toString())
-        if (auth.currentUser!!.uid == sellerId) {
-            binding.detailBt.text = "수정하기"
-            binding.detailBt.setOnClickListener {
+        //해당 게시물의 정보를 찾기 위한 값
+        val key = intent.getStringExtra("key")
+        val writer = intent.getStringExtra("writer_Id")
+        articleDB =
+            Firebase.database.reference.child(DB_ARTICLES).child("$key")
 
+        articleDB.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.detailTitle.text =
+                    snapshot.child("title").getValue(String::class.java).toString()
+                binding.detailCategory.text =
+                    snapshot.child("category").getValue(String::class.java).toString()
+                binding.detailContent.text =
+                    snapshot.child("content").getValue(String::class.java).toString()
+                binding.detailWriterName.text =
+                    snapshot.child("writer_Name").getValue(String::class.java).toString()
+                binding.detailHeight.text =
+                    snapshot.child("height").getValue(String::class.java).toString()
+                binding.detailWeight.text =
+                    snapshot.child("weight").getValue(String::class.java).toString()
+                val thumbnailImage =
+                    snapshot.child("imageUrl").getValue(String::class.java).toString()
+                val writerprofileimage =
+                    snapshot.child("profile_uri").getValue(String::class.java).toString()
+                if(thumbnailImage.isNotEmpty()){
+                    Glide.with(binding.detailUri)
+                        .load(thumbnailImage)
+                        .into(binding.detailUri)
+                }
+                if(writerprofileimage.isNotEmpty()){
+                    Glide.with(binding.writerProfileImage)
+                        .load(writerprofileimage)
+                        .into(binding.writerProfileImage)
+                }
             }
-        } else {
-            binding.detailBt.text = "제안하기"
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        if(writer == auth.currentUser?.uid){
+            binding.detailBt.text = "수정하기"
+        }else{
+            binding.detailBt.text="제안하기"
             binding.detailBt.setOnClickListener {
-                Toast.makeText(this,"클릭되었습니다.",Toast.LENGTH_LONG).show()
-                val intent = Intent(this, SuggestActivity::class.java)
-                intent.putExtra("sellerId", sellerId.toString())
-                intent.putExtra("key", key)
+                val intent = Intent(this,SuggestActivity::class.java)
                 startActivity(intent)
             }
         }
-
-        if (imageUri != null) {
-            if (imageUri.isNotEmpty()) {
-                Glide.with(binding.detailUri)
-                    .load(imageUri)
-                    .into(binding.detailUri)
-            }
-        }
-
 
         binding.closeBt.setOnClickListener {
             finish()
         }
 
         articleDB =
-            Firebase.database.reference.child(DB_ARTICLES).child(key.toString()).child(DB_Suggest)
+            Firebase.database.reference.child(DB_ARTICLES).child(key.toString())
+                .child(DB_Suggest)
 
         userDB = Firebase.database.reference.child(DB_USER)
         Log.d("databadddddddddddddse", articleDB.toString())
@@ -131,15 +132,15 @@ class DetailArticle : AppCompatActivity() {
         //제안한 목록을 클릭했을 때
         suggestAdapter = SuggestAdapter(onItemClicked = { suggestModel ->
             val chatRoom = ChatListItem(
-                buyerId =auth.currentUser!!.uid,
-                sellerId=suggestModel.suggestId,
+                buyerId = auth.currentUser!!.uid,
+                sellerId = suggestModel.suggestId,
                 itemTitle = suggestModel.title,
                 itemNo = suggestModel.key,
                 key = System.currentTimeMillis()
             )
-            Log.d("databadddddddddddddse","이거야 $chatRoom")
-            Log.d("databadddddddddddddse","이거야 $chatRoom")
-            Log.d("databadddddddddddddse","이거야 $suggestModel")
+            Log.d("databadddddddddddddse", "이거야 $chatRoom")
+            Log.d("databadddddddddddddse", "이거야 $chatRoom")
+            Log.d("databadddddddddddddse", "이거야 $suggestModel")
             userDB.child(auth.currentUser!!.uid)
                 .child(DB_CHAT)
                 .child(suggestModel.key)
@@ -150,7 +151,7 @@ class DetailArticle : AppCompatActivity() {
                 .child(suggestModel.key)
                 .setValue(chatRoom)
 
-        Toast.makeText(this,"채팅방이 생성되었씁니ㅏㄷ..",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "채팅방이 생성되었씁니ㅏㄷ..", Toast.LENGTH_LONG).show()
 
         })
         //recycler setting

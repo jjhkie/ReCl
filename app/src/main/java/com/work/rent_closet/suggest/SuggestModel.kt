@@ -6,7 +6,7 @@ data class SuggestModel(
     val createdAt: Long,
     val content: String,
     val category: String,
-    val seller: String?,
+    val offerId: String?,
     val suggestId: String,
     val imageUrl:String,
     val key: String

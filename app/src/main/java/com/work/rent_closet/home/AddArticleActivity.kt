@@ -82,19 +82,22 @@ class AddArticleActivity : AppCompatActivity() {
             val title = binding.titleEditText.text.toString()
             val category = binding.categoryText.selectedItem.toString()
             val content = binding.contentEditText.text.toString()
-            val sellerId = auth.currentUser?.uid.orEmpty()
+            val writer_Id = auth.currentUser?.uid.orEmpty()
 
-            var name = ""
-            var height = ""
-            var weight = ""
+            //var Writer_Name = ""
+            //var height = ""
+            //var weight = ""
+            //var profile_uri = ""
 
 
             userDB.child(auth.currentUser!!.uid)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        name = snapshot.child("uname").getValue(String::class.java).toString()
-                        height = snapshot.child("uheight").getValue(String::class.java).toString()
-                        weight = snapshot.child("uweight").getValue(String::class.java).toString()
+                        val Writer_Name = snapshot.child("uname").getValue(String::class.java).toString()
+                        val height = snapshot.child("uheight").getValue(String::class.java).toString()
+                        val weight = snapshot.child("uweight").getValue(String::class.java).toString()
+                        val profile_uri =
+                            snapshot.child("image").getValue(String::class.java).toString()
                         showProgress()
                         //중간에 이미지가 있으면 업로드 과정을 추가
                         if (selectedUri != null) {
@@ -103,7 +106,17 @@ class AddArticleActivity : AppCompatActivity() {
                             uploadPhoto(
                                 photoUri!!,
                                 successHandler = { uri ->
-                                    uploadArticle(sellerId, name, title,content, category, uri, height, weight)
+                                    uploadArticle(
+                                        writer_Id,
+                                        profile_uri,
+                                        Writer_Name,
+                                        title,
+                                        content,
+                                        category,
+                                        uri,
+                                        height,
+                                        weight
+                                    )
                                 },
                                 errorHandler = {
                                     Toast.makeText(
@@ -115,7 +128,17 @@ class AddArticleActivity : AppCompatActivity() {
                                 }
                             )
                         } else {
-                            uploadArticle(sellerId, name, title,content, category, "", height, weight)
+                            uploadArticle(
+                                writer_Id,
+                                profile_uri,
+                                Writer_Name,
+                                title,
+                                content,
+                                category,
+                                "",
+                                height,
+                                weight
+                            )
 
 
                         }
@@ -157,23 +180,23 @@ class AddArticleActivity : AppCompatActivity() {
     }
 
     //article 업로드
-
     private fun uploadArticle(
-        sellerId: String,
-        sellerName: String,
+        writer_Id: String,
+        profile_uri: String,
+        Writer_Name: String,
         title: String,
-        content:String,
+        content: String,
         category: String,
         imageUrl: String,
         height: String,
         weight: String
     ) {
-
         val dbkey = articleDB.push()
-        val key= dbkey.getKey().toString()
+        val key = dbkey.getKey().toString()
         val model = ArticleModel(
-            sellerId,
-            sellerName,
+            writer_Id,
+            profile_uri,
+            Writer_Name,
             title,
             content,
             System.currentTimeMillis(),

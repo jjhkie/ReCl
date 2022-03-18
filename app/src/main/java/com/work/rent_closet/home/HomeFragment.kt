@@ -73,33 +73,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //화면 전환 후 같은 뷰가 또 추가되는 현상을 막기 위해
         articleList.clear()
         //db 설정
-        articleDB = Firebase.database.reference.child(DB_ARTICLES)//
+        articleDB = Firebase.database.reference.child(DB_ARTICLES)
 
-        userDB = Firebase.database.reference.child(DB_USER)
+        //userDB = Firebase.database.reference.child(DB_USER)
 
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
             if(auth.currentUser != null){
-                //TODO detail_articel 을 한번에 넘기기 설정
+
                 //로그인이 되어있는 상황
 
-                //val detail_article= mutableListOf<ArticleModel>(articleModel)
                 val intent = Intent(requireContext(), DetailArticle::class.java)
-                intent.putExtra("sellerName",articleModel.sellerName)
-                intent.putExtra("createdAt",articleModel.createdAt)
-                intent.putExtra("category",articleModel.category)
-                intent.putExtra("content",articleModel.content)
-                intent.putExtra("sellerId",articleModel.sellerId)
 
-
-                intent.putExtra("title",articleModel.title)
-                intent.putExtra("image",articleModel.imageUrl)
-                intent.putExtra("height",articleModel.height)
-                intent.putExtra("weight",articleModel.weight)
+                intent.putExtra("writer_Id",articleModel.writer_Id)
                 intent.putExtra("key",articleModel.key)
 
                 startActivity(intent)
-                if(auth.currentUser!!.uid != articleModel.sellerId){
+                if(auth.currentUser!!.uid != articleModel.writer_Id){
 
                 }else{
                     //본인이 올린 게시물

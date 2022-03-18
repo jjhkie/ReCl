@@ -63,7 +63,7 @@ class SuggestActivity : AppCompatActivity() {
                     }
                 }
             }
-        val seller = intent.getStringExtra("sellerId")
+        val offerId = intent.getStringExtra("sellerId")
         val suggestId = auth.currentUser!!.uid
 
         //이미지 등록
@@ -111,7 +111,7 @@ class SuggestActivity : AppCompatActivity() {
                             price,
                             content,
                             category,
-                            seller.toString(),
+                            offerId.toString(),
                             suggestId,
                             uri,
                             key.toString()
@@ -131,7 +131,7 @@ class SuggestActivity : AppCompatActivity() {
                     price,
                     content,
                     category,
-                    seller.toString(),
+                    offerId.toString(),
                     suggestId,
                     "",
                     key.toString()
@@ -155,7 +155,7 @@ class SuggestActivity : AppCompatActivity() {
         price: String,
         content: String,
         category: String,
-        seller: String,
+        offerId: String,
         suggestId: String,
         uri: String,
         key: String
@@ -166,7 +166,7 @@ class SuggestActivity : AppCompatActivity() {
             System.currentTimeMillis(),
             content,
             category,
-            seller,
+            offerId,
             suggestId,
             uri,
             key

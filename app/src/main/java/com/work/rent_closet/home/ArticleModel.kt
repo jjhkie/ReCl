@@ -6,8 +6,9 @@ import kotlinx.android.parcel.Parcelize
 //파이어베이스 리얼타임데이터베이스에 모델을 고대로 사용하려면 빈 생성자가 꼭 필요하다
 @Parcelize
 data class ArticleModel(
-    val sellerId: String,
-    val sellerName: String,
+    val writer_Id: String,
+    val profile_uri: String,
+    val writer_Name: String,
     val title: String,
     val content: String,
     val createdAt: Long,
@@ -18,6 +19,6 @@ data class ArticleModel(
     val key : String
 ): Parcelable
 {
-    constructor(): this("","","","",0,"","","","","")
+    constructor(): this("","","","","",0,"","","","","")
 }
 
