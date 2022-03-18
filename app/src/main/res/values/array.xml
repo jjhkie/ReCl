@@ -15,8 +15,8 @@
     </string-array>
 
     <string-array name="suggest_category">
-        <item>옷장에서 팔기</item>
         <item>옷장에서 제인하기</item>
+        <item>옷장에서 팔기</item>
         <item>제인하기</item>
     </string-array>
 

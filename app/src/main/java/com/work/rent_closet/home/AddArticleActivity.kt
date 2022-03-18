@@ -53,7 +53,7 @@ class AddArticleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //이미지 등록 버튼을 클릭했을 때
-        binding.imageAddButton.setOnClickListener {
+        binding.photoImageView.setOnClickListener {
             when {
                 ContextCompat.checkSelfPermission(
                     this,

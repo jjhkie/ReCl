@@ -5,10 +5,11 @@ data class SuggestModel(
     val price: String,
     val createdAt: Long,
     val content: String,
-    val imageUrl:String,
+    val category: String,
     val seller: String?,
     val suggestId: String,
+    val imageUrl:String,
     val key: String
 ){
-    constructor(): this("","",0,"","","","","")
+    constructor(): this("","",0,"","","","","","")
 }

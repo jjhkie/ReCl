@@ -2,24 +2,38 @@ package com.work.rent_closet.suggest
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.work.rent_closet.databinding.ItemSuggestBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class SuggestAdapter (val onItemClicked:(SuggestModel)->Unit): ListAdapter<SuggestModel, SuggestAdapter.ViewHolder>(diffUtil) {
+class SuggestAdapter(val onItemClicked: (SuggestModel) -> Unit) :
+    ListAdapter<SuggestModel, SuggestAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemSuggestBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(suggestModel: SuggestModel) {
+            val format = SimpleDateFormat("MM월 dd일")
+            val date = Date(suggestModel.createdAt)
 
+            binding.suggestContent.text = suggestModel.content
+            binding.suggestCategory.text = suggestModel.category
+            if(binding.suggestCategory.toString() == "옷장에서 팔기"){
+                binding.suggestPrice.visibility = View.VISIBLE
+            }else{
+                binding.suggestPrice.visibility = View.GONE
+            }
+            binding.suggestDate.text = format.format(date).toString()
             binding.suggestTitle.text = suggestModel.title
             binding.suggestPrice.text = suggestModel.price
-            Log.d("databadddddddddddddse","suggestAdapter$suggestModel")
+            Log.d("databadddddddddddddse", "suggestAdapter$suggestModel")
 
             //예외처리로 imageUrl이 비어있지않다면 실행
             if (suggestModel.imageUrl.isNotEmpty()) {
