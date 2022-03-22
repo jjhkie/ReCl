@@ -1,7 +1,6 @@
 package com.work.rent_closet.page
 
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -113,7 +112,10 @@ class DetailArticle : AppCompatActivity() {
         }else{
             binding.detailBt.text="제안하기"
             binding.detailBt.setOnClickListener {
+
                 val intent = Intent(this,SuggestActivity::class.java)
+                intent.putExtra("key",key)
+                intent.putExtra("offer_id",writer)
                 startActivity(intent)
             }
         }
@@ -150,7 +152,7 @@ class DetailArticle : AppCompatActivity() {
                 .child(DB_CHAT)
                 .child(suggestModel.key)
                 .setValue(chatRoom)
-
+            
             Toast.makeText(this, "채팅방이 생성되었씁니ㅏㄷ..", Toast.LENGTH_LONG).show()
 
         })

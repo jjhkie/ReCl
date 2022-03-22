@@ -63,7 +63,8 @@ class SuggestActivity : AppCompatActivity() {
                     }
                 }
             }
-        val offerId = intent.getStringExtra("sellerId")
+        val offerId = intent.getStringExtra("offer_id")
+        val key = intent.getStringExtra("key")
         val suggestId = auth.currentUser!!.uid
 
         //이미지 등록
@@ -98,8 +99,8 @@ class SuggestActivity : AppCompatActivity() {
             val price = binding.suggestPrice.text.toString()
             val category = binding.suggestCategory.selectedItem.toString()
             val content = binding.suggestContent.text.toString()
-            val key = intent.getStringExtra("key")
 
+            Log.d("key",key.toString())
             if (suggestUri != null) {
 
                 val photoUri = suggestUri

@@ -80,15 +80,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //adapter 초기화
         articleAdapter = ArticleAdapter(onItemClicked = { articleModel ->  
             if(auth.currentUser != null){
-
                 //로그인이 되어있는 상황
-
                 val intent = Intent(requireContext(), DetailArticle::class.java)
 
                 intent.putExtra("writer_Id",articleModel.writer_Id)
                 intent.putExtra("key",articleModel.key)
-
                 startActivity(intent)
+
                 if(auth.currentUser!!.uid != articleModel.writer_Id){
 
                 }else{

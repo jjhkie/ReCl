@@ -25,7 +25,7 @@ class ChatListAdapter (val onItemClicked: (ChatListItem) -> Unit): ListAdapter<C
             //그러면 ArticleAdapter를 처음 초기화해준 부분에서 람다가 실행된다.
             binding.root.setOnClickListener {
                 onItemClicked(chatListItem)
-
+                
             }
         }
     }

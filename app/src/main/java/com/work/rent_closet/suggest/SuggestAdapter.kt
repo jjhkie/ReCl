@@ -25,7 +25,7 @@ class SuggestAdapter(val onItemClicked: (SuggestModel) -> Unit) :
 
             binding.suggestContent.text = suggestModel.content
             binding.suggestCategory.text = suggestModel.category
-            if(binding.suggestCategory.toString() == "옷장에서 팔기"){
+            if(binding.suggestCategory.text == "옷장에서 팔기"){
                 binding.suggestPrice.visibility = View.VISIBLE
             }else{
                 binding.suggestPrice.visibility = View.GONE
