@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">rent_clothes</string>
-    <string name="bottom_menu_home">홈</string>
-    <string name="bottom_menu_chat">채팅</string>
-    <string name="bottom_menu_mypage">나의 정보</string>
+    <string name="bottom_menu_home">home</string>
+    <string name="bottom_menu_chat">chat</string>
+    <string name="bottom_menu_mypage">mypage</string>
     <string name="title_activity_signup">Signup</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -10,13 +10,13 @@
         android:id="@+id/close_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
-        android:scaleType="fitStart"
+        android:layout_marginTop="40dp"
         android:elevation="1dp"
+        android:scaleType="fitStart"
         android:src="@drawable/ic__close_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
@@ -30,13 +30,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            android:background="@color/black">
 
             <LinearLayout
                 android:id="@+id/ImageLinear"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -54,62 +57,69 @@
                     android:paddingEnd="15dp">
 
                     <LinearLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="15dp"
                         android:orientation="horizontal">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/writer_profile_image"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"/>
+                            android:layout_height="80dp" />
+
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:paddingStart="20dp">
 
-
-
-                        <TextView
-                            android:id="@+id/detail_WriterName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            tools:text="이름" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal"
-                            android:paddingStart="5dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp">
 
                             <TextView
-                                android:id="@+id/detail_height"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/detail_WriterName"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="height" />
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                tools:text="이름" />
 
-                            <TextView
-                                android:id="@+id/detail_weight"
-                                android:layout_width="wrap_content"
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:text="weight" />
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:paddingVertical="5dp">
+
+                                <TextView
+                                    android:id="@+id/detail_height"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:textColor="@color/white"
+                                    tools:text="height" />
+
+                                <TextView
+                                    android:id="@+id/detail_weight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:textColor="@color/white"
+                                    tools:text="weight" />
 
 
+                            </LinearLayout>
                         </LinearLayout>
-                        </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/gray" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -122,29 +132,35 @@
                             android:id="@+id/detail_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="title"
-                            android:textSize="28dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/detail_createAt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="" />
-
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="title" />
                         <TextView
                             android:id="@+id/detail_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="price" />
+                            android:textColor="@color/gray"
+                            android:textSize="13sp"
+                            android:layout_marginTop="10dp"
+                            tools:text="category" />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/detail_createAt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            tools:text="작성자" />
+
 
                         <TextView
                             android:id="@+id/detail_content"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:text="content"
-                            android:textColor="@color/black" />
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            tools:text="content" />
 
                     </LinearLayout>
 
@@ -153,6 +169,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="등록하기" />
+
+                    <View
+                        android:layout_marginVertical="10dp"
+                        android:layout_width="match_parent"
+                        android:background="@color/gray"
+                        android:layout_height="1dp"/>
                 </LinearLayout>
 
 

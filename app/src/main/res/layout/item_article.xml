@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="30dp"
-    android:paddingVertical="15dp">
+    android:paddingVertical="15dp"
+    tools:background="@color/black">
 
 
     <LinearLayout
@@ -13,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@id/cardViewImage"
         app:layout_constraintEnd_toEndOf="@+id/cardViewImage"
         app:layout_constraintStart_toStartOf="@+id/cardViewImage"
-        app:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
@@ -25,8 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/thumbnailImageView"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,12 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:textColor="@color/gray"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="상의" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/dateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,17 +71,16 @@
         app:cardElevation="20dp"
         android:padding="10dp"
         android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content_LinearLayout">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/thumbnailImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="400dp"
+            android:minHeight="450dp"
             android:scaleType="center" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

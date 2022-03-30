@@ -21,7 +21,7 @@
             android:id="@+id/senderTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/gray"
             android:textSize="15sp"
             android:textStyle="bold"
            tools:text="NiCKName" />
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
              tools:text="Message" />
     </LinearLayout>

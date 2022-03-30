@@ -74,5 +74,9 @@ class ChatRoomActivity : AppCompatActivity() {
             )
             chatRoomDB.push().setValue(chatItem)
         }
+
+        binding.closeBt.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="안녕하세요"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="28sp" />
 
         <TextView
@@ -37,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:text="ReCl 입니다."
-            android:textColor="@color/black"
+            android:text="Clort 입니다."
+            android:textColor="@color/white"
             android:textSize="28sp" />
 
         <TextView
@@ -48,6 +49,7 @@
             android:layout_marginBottom="40dp"
             android:gravity="center"
             android:text="회원 서비스를 위해 로그인 하세요"
+            android:textColor="@color/white"
             android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
@@ -63,12 +65,15 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/edittext_impact"
                 android:layout_marginBottom="10dp"
                 android:hint="Email"
+                android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
 
             <EditText
+                android:background="@drawable/edittext_impact"
+                android:textColor="@color/white"
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,33 +92,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="이메일 찾기"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:text="|" />
+                    android:text="|"
+                    android:textColor="@color/gray"/>
 
                 <TextView
                     android:id="@+id/password_find_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="비밀번호 찾기"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:text="|" />
+                    android:text="|"
+                    android:textColor="@color/gray"/>
 
                 <TextView
                     android:id="@+id/signUpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="회원가입"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
 
@@ -141,7 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="28sp"
                         tools:text="이름" />
 
@@ -150,6 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
+                        android:textColor="@color/gray"
                         android:textSize="14sp"
                         tools:text="몸무게" />
 
@@ -158,6 +166,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
+                        android:textColor="@color/gray"
                         tools:text="키" />
 
                 </LinearLayout>

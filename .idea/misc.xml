@@ -3,16 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/account_icon_white.xml" value="0.2275" />
         <entry key="app/src/main/res/drawable/background_round.xml" value="0.1775" />
+        <entry key="app/src/main/res/drawable/edittext_impact.xml" value="0.129" />
         <entry key="app/src/main/res/drawable/gradation_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_account_24.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_add_24.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_home_24.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/ic_one_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_person_24.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_two_24.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/imageview_round.xml" value="0.1505" />
         <entry key="app/src/main/res/drawable/selector_bottom_menu.xml" value="0.1175" />
         <entry key="app/src/main/res/layout/activity_actionbar.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/activity_add_article.xml" value="0.24096385542168675" />
-        <entry key="app/src/main/res/layout/activity_chatroom.xml" value="0.12685185185185185" />
+        <entry key="app/src/main/res/layout/activity_chatroom.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_suggest.xml" value="0.19635416666666666" />
-        <entry key="app/src/main/res/layout/activity_detailarticle.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_detailarticle.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/activity_suggestarticle.xml" value="0.25" />
@@ -26,6 +34,7 @@
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/item_chat_list.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/item_suggest.xml" value="0.23360595703125" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.21927083333333333" />
       </map>
     </option>
   </component>

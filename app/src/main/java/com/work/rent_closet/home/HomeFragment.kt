@@ -126,15 +126,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //그런데 kotlin 에서는 get 을 생략할 수 있으므로 context로 작성
         //binding.articleRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         //양 옆으로 사진이 보여지기 위해 add
-        binding.articleViewPager.offscreenPageLimit=3
-        binding.articleViewPager.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
-        var transform = CompositePageTransformer()
-        transform.addTransformer(MarginPageTransformer(8))
-        transform.addTransformer(ViewPager2.PageTransformer{ view: View, fl: Float ->
-            var v = 1-Math.abs(fl)
-            view.scaleY = 0.8f + v * 0.2f
-        })
-        binding.articleViewPager.setPageTransformer(transform)
+//        binding.articleViewPager.offscreenPageLimit=3
+//        binding.articleViewPager.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+//        var transform = CompositePageTransformer()
+//        transform.addTransformer(MarginPageTransformer(8))
+//        transform.addTransformer(ViewPager2.PageTransformer{ view: View, fl: Float ->
+//            var v = 1-Math.abs(fl)
+//            view.scaleY = 0.8f + v * 0.2f
+//        })
+//        binding.articleViewPager.setPageTransformer(transform)
+
+
+
 
         //add
         binding.articleViewPager.adapter = articleAdapter
